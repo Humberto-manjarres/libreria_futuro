@@ -1,0 +1,11 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "libreria"
+  devtools:
+    add-properties: false
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/libreria_bd
+    username: postgres
+    password: Humberto22092

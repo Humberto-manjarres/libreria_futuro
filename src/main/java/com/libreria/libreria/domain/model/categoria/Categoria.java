@@ -1,4 +1,4 @@
-package com.libreria.libreria.domain.model.escritor;
+package com.libreria.libreria.domain.model.categoria;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Escritor {
-    private Integer id;
-    private String identificacion;
-    private String nombre;
+public class Categoria {
+    private int id;
 }

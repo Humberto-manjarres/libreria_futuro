@@ -1,4 +1,5 @@
-package com.libreria.libreria.domain.model.escritor;
+package com.libreria.libreria.infraestructure.entry_points.reactive_web.escritor.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Escritor {
+public class EscritorDTO {
     private Integer id;
     private String identificacion;
     private String nombre;
