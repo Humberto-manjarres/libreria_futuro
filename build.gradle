@@ -47,6 +47,11 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
+	//librería jackson
+	implementation 'com.fasterxml.jackson.core:jackson-databind' // Serialización y deserialización
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310' // Soporte para LocalDateTime
+
+
 }
 
 tasks.named('test') {

@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface EscritorR2dbcTransformer {
-    EscritorEntity transformarAEscritorioEntity(Escritor escritor);
-    Escritor transformarAEscritorio(EscritorEntity escritorEntity);
+    EscritorEntity transformarAEscritorEntity(Escritor escritor);
+    Escritor transformarAEscritor(EscritorEntity escritorEntity);
 }

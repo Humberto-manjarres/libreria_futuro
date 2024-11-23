@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface EscritorGateway {
     Mono<Escritor> crearEscritor(Escritor escritor);
+    Mono<Escritor> consultarEscritor(String identificacion);
 }

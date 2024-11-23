@@ -25,4 +25,10 @@ public class UseCaseConfig {
         return new CategoriaUseCase();
     }
 
+    /*@Bean
+    public ErrorWebExceptionHandler globalExceptionHandler() {
+        return new GlobalExceptionHandler();
+    }*/
+
+
 }

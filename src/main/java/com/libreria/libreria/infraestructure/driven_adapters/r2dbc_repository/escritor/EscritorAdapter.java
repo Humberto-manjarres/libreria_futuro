@@ -17,7 +17,13 @@ public class EscritorAdapter implements EscritorGateway {
 
     @Override
     public Mono<Escritor> crearEscritor(Escritor escritor) {
-        return repository.save(r2dbcTransformer.transformarAEscritorioEntity(escritor))
-                .map(r2dbcTransformer::transformarAEscritorio);
+        return repository.save(r2dbcTransformer.transformarAEscritorEntity(escritor))
+                .map(r2dbcTransformer::transformarAEscritor);
+    }
+
+    @Override
+    public Mono<Escritor> consultarEscritor(String identificacion) {
+        return repository.findByIdentificacion(identificacion)
+                .map(r2dbcTransformer::transformarAEscritor);
     }
 }
