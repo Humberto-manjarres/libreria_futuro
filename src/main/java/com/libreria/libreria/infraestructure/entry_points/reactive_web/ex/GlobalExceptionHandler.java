@@ -6,6 +6,7 @@ import com.libreria.libreria.domain.model.ex.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,11 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         if (ex instanceof BusinessException) {
             status = HttpStatus.BAD_REQUEST;
             message = ex.getMessage();
+        }
+
+        if (ex instanceof DuplicateKeyException){
+            status = HttpStatus.CONFLICT;
+            message = "La identificación ya existe en el sistema, ingrese otra";
         }
 
         // Configurar la respuesta HTTP

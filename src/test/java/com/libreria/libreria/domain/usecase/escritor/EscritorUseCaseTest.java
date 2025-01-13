@@ -11,8 +11,6 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class EscritorUseCaseTest {
 
     @InjectMocks
@@ -32,7 +30,7 @@ class EscritorUseCaseTest {
                 .thenReturn(Mono.just(Escritor.builder().id(1).identificacion("123").nombre("ABC").build()));
         Mono<Escritor> escritorMono = useCase.crearEscritor(Mockito.mock(Escritor.class));
         StepVerifier.create(escritorMono)
-                .expectNextMatches(escritor -> escritor.getId() == 1);
+                    .expectNextMatches(escritor -> escritor.getId() == 1);
 
     }
 

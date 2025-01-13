@@ -1,4 +1,4 @@
-package com.libreria.libreria.domain.model.categoria;
+package com.libreria.libreria.infraestructure.entry_points.reactive_web.categoria.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Categoria {
+public class CategoriaDTO {
     private Integer id;
     private String nombre;
 }

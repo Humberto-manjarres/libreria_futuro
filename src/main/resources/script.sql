@@ -3,3 +3,8 @@ CREATE TABLE escritor (
     identificacion VARCHAR(255) NOT NULL UNIQUE,  -- Restricción UNIQUE
     nombre VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE categoria (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL
+);
