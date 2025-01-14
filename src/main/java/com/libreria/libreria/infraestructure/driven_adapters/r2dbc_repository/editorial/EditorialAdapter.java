@@ -22,4 +22,9 @@ public class EditorialAdapter implements EditorialGateway {
                 .map(transformer::transformarAEditorial);
     }
 
+    @Override
+    public Mono<Editorial> consultarEditorial(Integer id) {
+        return repository.findById(id).map(transformer::transformarAEditorial);
+    }
+
 }

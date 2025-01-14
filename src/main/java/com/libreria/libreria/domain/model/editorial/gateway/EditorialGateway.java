@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface EditorialGateway {
     Mono<Editorial> crearEditorial(Editorial editorial);
+    Mono<Editorial> consultarEditorial(Integer id);
 }

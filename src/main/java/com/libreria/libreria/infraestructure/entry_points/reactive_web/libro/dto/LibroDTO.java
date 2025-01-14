@@ -1,4 +1,4 @@
-package com.libreria.libreria.domain.model.libro;
+package com.libreria.libreria.infraestructure.entry_points.reactive_web.libro.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Libro {
+public class LibroDTO {
     private Integer id;
     private String nombre;
     private String idEscritor;

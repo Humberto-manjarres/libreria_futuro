@@ -40,11 +40,20 @@ class CategoriaControllerTest {
                 .expectNext(getCategoriaDTO()).verifyComplete();
     }
 
+    @Test
+    void consultarCategoria(){
+        Mockito.when(useCase.consultarCategoria(1)).thenReturn(Mono.just(getCategoria()));
+        Mockito.when(transformer.transformarACategoriaDTO(getCategoria())).thenReturn(getCategoriaDTO());
+        Mono<CategoriaDTO> categoriaDTO = controller.consultarCategoria(1);
+        StepVerifier.create(categoriaDTO)
+                .expectNext(getCategoriaDTO()).verifyComplete();
+    }
+
     private CategoriaDTO getCategoriaDTO(){
-        return CategoriaDTO.builder().nombre("ABC").build();
+        return CategoriaDTO.builder().id(1).nombre("ABC").build();
     }
 
     private Categoria getCategoria(){
-        return Categoria.builder().nombre("ABC").build();
+        return Categoria.builder().id(1).nombre("ABC").build();
     }
 }

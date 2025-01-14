@@ -4,7 +4,9 @@ public class BusinessException extends ApplicationException{
 
     public enum Type{
 
-        ESCRITOR_NO_EXISTE("Escritor no existe!");
+        ESCRITOR_NO_EXISTE("Escritor no existe!"),
+        EDITORIAL_NO_EXISTE("Editorial no existe!"),
+        CATEGORIA_NO_EXISTE("Categoria no existe!");
 
         private final String message;
 

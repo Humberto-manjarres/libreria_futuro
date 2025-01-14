@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface CategoriaGateway {
     Mono<Categoria> crearCategoria(Categoria categoria);
+    Mono<Categoria> consultarCategoria(Integer id);
 }

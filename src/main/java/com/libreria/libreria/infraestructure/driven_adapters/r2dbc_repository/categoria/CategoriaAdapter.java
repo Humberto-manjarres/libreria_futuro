@@ -21,4 +21,9 @@ public class CategoriaAdapter implements CategoriaGateway {
                 .map(transformer::transformarACategoria);
     }
 
+    @Override
+    public Mono<Categoria> consultarCategoria(Integer id) {
+        return repository.findById(id).map(transformer::transformarACategoria);
+    }
+
 }

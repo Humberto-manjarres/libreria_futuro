@@ -39,11 +39,21 @@ class EditorialControllerTest {
                 .expectNext(getEditorialDTO()).verifyComplete();
     }
 
+    @Test
+    void consultarEditorial(){
+        Mockito.when(useCase.consultarEditorial(1)).thenReturn(Mono.just(getEditorial()));
+        Mockito.when(transformer.transformarAEditorialDTO(getEditorial())).thenReturn(getEditorialDTO());
+        Mono<EditorialDTO> editorialDTO = controller.consultarEditorial(1);
+        StepVerifier.create(editorialDTO)
+                .expectNext(getEditorialDTO()).verifyComplete();
+
+    }
+
     private Editorial getEditorial(){
-        return Editorial.builder().nombre("ABC").build();
+        return Editorial.builder().id(1).nombre("ABC").build();
     }
 
     private EditorialDTO getEditorialDTO(){
-        return EditorialDTO.builder().nombre("ABC").build();
+        return EditorialDTO.builder().id(1).nombre("ABC").build();
     }
 }

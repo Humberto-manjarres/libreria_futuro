@@ -3,9 +3,11 @@ package com.libreria.libreria.application;
 import com.libreria.libreria.domain.model.categoria.gateway.CategoriaGateway;
 import com.libreria.libreria.domain.model.editorial.gateway.EditorialGateway;
 import com.libreria.libreria.domain.model.escritor.gateway.EscritorGateway;
+import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
 import com.libreria.libreria.domain.usecase.escritor.EscritorUseCase;
+import com.libreria.libreria.domain.usecase.libro.LibroUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +27,11 @@ public class UseCaseConfig {
     @Bean
     public CategoriaUseCase categoriaUseCase(CategoriaGateway categoriaGateway){
         return new CategoriaUseCase(categoriaGateway);
+    }
+
+    @Bean
+    public LibroUseCase libroUseCase(LibroGateway libroGateway,EscritorUseCase escritorUseCase,CategoriaUseCase categoriaUseCase,EditorialUseCase editorialUseCase){
+        return new LibroUseCase(libroGateway,escritorUseCase,categoriaUseCase,editorialUseCase);
     }
 
     /*@Bean
