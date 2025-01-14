@@ -1,5 +1,4 @@
-package com.libreria.libreria.domain.model.editorial;
-
+package com.libreria.libreria.infraestructure.entry_points.reactive_web.editorial.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Editorial {
+public class EditorialDTO {
     private Integer id;
     private String nombre;
     private String direccion;

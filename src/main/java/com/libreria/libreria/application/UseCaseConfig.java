@@ -1,6 +1,7 @@
 package com.libreria.libreria.application;
 
 import com.libreria.libreria.domain.model.categoria.gateway.CategoriaGateway;
+import com.libreria.libreria.domain.model.editorial.gateway.EditorialGateway;
 import com.libreria.libreria.domain.model.escritor.gateway.EscritorGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
@@ -17,8 +18,8 @@ public class UseCaseConfig {
     }
 
     @Bean
-    public EditorialUseCase editorialUseCase(){
-        return new EditorialUseCase();
+    public EditorialUseCase editorialUseCase(EditorialGateway gateway){
+        return new EditorialUseCase(gateway);
     }
 
     @Bean

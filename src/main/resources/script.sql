@@ -8,3 +8,10 @@ CREATE TABLE categoria (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL
 );
+
+
+CREATE TABLE editorial (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT null,
+    direccion VARCHAR(255) NOT null
+);

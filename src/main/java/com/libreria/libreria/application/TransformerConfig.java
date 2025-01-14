@@ -1,8 +1,10 @@
 package com.libreria.libreria.application;
 
 import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.categoria.trasnformer.CategoriaR2dbcTransformer;
+import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.editorial.transformer.EditorialR2dbcTransformer;
 import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.escritor.transformer.EscritorR2dbcTransformer;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.categoria.transformers.CategoriaTransformer;
+import com.libreria.libreria.infraestructure.entry_points.reactive_web.editorial.transformers.EditorialTransformer;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.escritor.transformers.EscritorTransformer;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
@@ -33,5 +35,17 @@ public class TransformerConfig {
     public CategoriaR2dbcTransformer categoriaR2dbcTransformer() {
         return Mappers.getMapper(
                 CategoriaR2dbcTransformer.class);
+    }
+
+    @Bean
+    public EditorialTransformer editorialTransformer() {
+        return Mappers.getMapper(
+                EditorialTransformer.class);
+    }
+
+    @Bean
+    public EditorialR2dbcTransformer editorialR2dbcTransformer() {
+        return Mappers.getMapper(
+                EditorialR2dbcTransformer.class);
     }
 }
