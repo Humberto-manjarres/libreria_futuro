@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface LibroGateway {
     Mono<Libro> crearLibro(Libro libro);
+    Mono<Libro> consultarLibro(Integer id);
 }

@@ -1,5 +1,6 @@
 package com.libreria.libreria.domain.usecase.libro;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.libreria.libreria.domain.model.categoria.Categoria;
 import com.libreria.libreria.domain.model.editorial.Editorial;
 import com.libreria.libreria.domain.model.escritor.Escritor;
@@ -51,6 +52,17 @@ class LibroUseCaseTest {
                 .expectNextMatches(libro1 -> libro1.getNombre().equals("ABC")).verifyComplete();
     }
 
+    @Test
+    void consultarLibro(){
+        Mockito.when(gateway.consultarLibro(1)).thenReturn(Mono.just(getLibro()));
+        Mockito.when(escritorUseCase.consultarEscritor("123")).thenReturn(Mono.just(getEscritor()));
+        Mockito.when(categoriaUseCase.consultarCategoria(1)).thenReturn(Mono.just(getCategoria()));
+        Mockito.when(editorialUseCase.consultarEditorial(1)).thenReturn(Mono.just(getEditorial()));
+        Mono<JsonNode> response = libroUseCase.consultarLibro(1);
+        StepVerifier.create(response)
+                .expectNextMatches(jsonNode -> jsonNode.get("id").asInt() == 1).verifyComplete();
+    }
+
     private Escritor getEscritor(){
         return Escritor.builder().identificacion("123").build();
     }
@@ -64,7 +76,7 @@ class LibroUseCaseTest {
     }
 
     private Libro getLibro(){
-        return Libro.builder().idEscritor("123").idCategoria(1).idEditorial(1).nombre("ABC").build();
+        return Libro.builder().id(1).idEscritor("123").idCategoria(1).idEditorial(1).nombre("ABC").build();
     }
 
 }

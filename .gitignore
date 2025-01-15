@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar archivos generados por JaCoCo
+build/jacoco/
+build/reports/

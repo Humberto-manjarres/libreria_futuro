@@ -6,7 +6,8 @@ public class BusinessException extends ApplicationException{
 
         ESCRITOR_NO_EXISTE("Escritor no existe!"),
         EDITORIAL_NO_EXISTE("Editorial no existe!"),
-        CATEGORIA_NO_EXISTE("Categoria no existe!");
+        CATEGORIA_NO_EXISTE("Categoria no existe!"),
+        LIBRO_NO_EXISTE("Libro no existe!");
 
         private final String message;
 

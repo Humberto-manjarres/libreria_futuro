@@ -20,4 +20,9 @@ public class LibroAdapter implements LibroGateway {
         return repository.save(transformer.transformarAEditorialEntity(libro)).map(transformer::transformarALibro);
     }
 
+    @Override
+    public Mono<Libro> consultarLibro(Integer id) {
+        return repository.findById(id).map(transformer::transformarALibro);
+    }
+
 }
