@@ -21,6 +21,9 @@ public class LibroEntity {
     @Column(value = "nombre")
     private String nombre;
 
+    @Column(value = "numero_paginas")
+    private int numeroPaginas;
+
     @Column(value = "id_escritor")
     private String idEscritor;
 
