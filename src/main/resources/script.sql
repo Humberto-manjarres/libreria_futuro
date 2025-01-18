@@ -26,3 +26,7 @@ CREATE TABLE libro (
     id_categoria VARCHAR(255) NOT null,
     id_editorial VARCHAR(255) NOT null
 );
+
+
+--URL Mock Server
+--https://eb107633-5226-4b0c-ae5a-a070da6705c3.mock.pstmn.io/caratula/libro/

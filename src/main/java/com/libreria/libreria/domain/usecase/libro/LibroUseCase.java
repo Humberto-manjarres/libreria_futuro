@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.libreria.libreria.domain.model.ex.BusinessException;
+import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.model.libro.Libro;
+import com.libreria.libreria.domain.model.libro.gateway.LibroConsumerGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
@@ -16,6 +18,7 @@ import reactor.core.publisher.Mono;
 public class LibroUseCase {
 
     private final LibroGateway libroGateway;
+    private final LibroConsumerGateway libroConsumerGateway;
     private final EscritorUseCase escritorUseCase;
     private final CategoriaUseCase categoriaUseCase;
     private final EditorialUseCase editorialUseCase;
@@ -42,6 +45,7 @@ public class LibroUseCase {
                     jsonNode.put("id", libro.getId());
                     jsonNode.put("nombre", libro.getNombre());
                     jsonNode.put("descripcion", libro.getDescripcion());
+                    jsonNode.put("numero_paginas", libro.getNumeroPaginas());
 
                     jsonNode.set("escritor", objectMapper.valueToTree(tuple.getT1()));
                     jsonNode.set("categoria", objectMapper.valueToTree(tuple.getT2()));
@@ -49,6 +53,10 @@ public class LibroUseCase {
 
                     return jsonNode;
                 }));
+    }
+
+    public Mono<Caratula> consultarCaratulaLibro(Integer idLibro){
+        return libroConsumerGateway.consultarCaratula(idLibro);
     }
 
 }

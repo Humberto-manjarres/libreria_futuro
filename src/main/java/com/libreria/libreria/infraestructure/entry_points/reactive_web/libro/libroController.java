@@ -1,8 +1,8 @@
 package com.libreria.libreria.infraestructure.entry_points.reactive_web.libro;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.usecase.libro.LibroUseCase;
-import com.libreria.libreria.infraestructure.entry_points.reactive_web.editorial.dto.EditorialDTO;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.libro.dto.LibroDTO;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.libro.transformers.LibroTransformer;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +27,12 @@ public class libroController {
     @GetMapping(path = "/consultar/{id}")
     public Mono<JsonNode> consultarLibro(@PathVariable Integer id){
         return libroUseCase.consultarLibro(id);
+    }
+
+    @GetMapping(path = "/consultar-caratula/{idLibro}")
+    public Mono<Caratula> consultarCaratulaLibro(@PathVariable Integer idLibro){
+        System.out.println("idLibro = " + idLibro);
+        return libroUseCase.consultarCaratulaLibro(idLibro);
     }
 
 }
