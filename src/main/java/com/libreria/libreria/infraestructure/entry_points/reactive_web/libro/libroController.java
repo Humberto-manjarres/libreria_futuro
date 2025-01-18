@@ -31,7 +31,6 @@ public class libroController {
 
     @GetMapping(path = "/consultar-caratula/{idLibro}")
     public Mono<Caratula> consultarCaratulaLibro(@PathVariable Integer idLibro){
-        System.out.println("idLibro = " + idLibro);
         return libroUseCase.consultarCaratulaLibro(idLibro);
     }
 

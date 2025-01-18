@@ -3,6 +3,7 @@ package com.libreria.libreria.infraestructure.entry_points.reactive_web.libro;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.model.libro.Libro;
 import com.libreria.libreria.domain.usecase.libro.LibroUseCase;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.libro.dto.LibroDTO;
@@ -62,6 +63,12 @@ class libroControllerTest {
                 .verifyComplete();
     }
 
+    @Test
+    void consultarCaratulaLibro(){
+        Mockito.when(useCase.consultarCaratulaLibro(1)).thenReturn(Mono.just(getCaratula()));
+        Mono<Caratula> caratula = controller.consultarCaratulaLibro(1);
+        StepVerifier.create(caratula).expectNext(getCaratula()).verifyComplete();
+    }
 
     private Libro getLibro(){
         return Libro.builder().nombre("ABC").build();
@@ -69,6 +76,10 @@ class libroControllerTest {
 
     private LibroDTO getLibroDTO(){
         return LibroDTO.builder().nombre("ABC").build();
+    }
+
+    private Caratula getCaratula(){
+        return Caratula.builder().caratula("ABC").build();
     }
 
 }

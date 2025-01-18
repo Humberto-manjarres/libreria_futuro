@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.libreria.libreria.domain.model.categoria.Categoria;
 import com.libreria.libreria.domain.model.editorial.Editorial;
 import com.libreria.libreria.domain.model.escritor.Escritor;
+import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.model.libro.Libro;
+import com.libreria.libreria.domain.model.libro.gateway.LibroConsumerGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
@@ -25,6 +27,9 @@ class LibroUseCaseTest {
 
     @Mock
     private LibroGateway gateway;
+
+    @Mock
+    private LibroConsumerGateway consumerGateway;
 
     @Mock
     private CategoriaUseCase categoriaUseCase;
@@ -63,6 +68,13 @@ class LibroUseCaseTest {
                 .expectNextMatches(jsonNode -> jsonNode.get("id").asInt() == 1).verifyComplete();
     }
 
+    @Test
+    void consultarCaratulaLibro(){
+        Mockito.when(consumerGateway.consultarCaratula(1)).thenReturn(Mono.just(getCaratula()));
+        StepVerifier.create(libroUseCase.consultarCaratulaLibro(1))
+                .expectNextMatches(caratula -> caratula.getCaratula().equals("ABC"));
+    }
+
     private Escritor getEscritor(){
         return Escritor.builder().identificacion("123").build();
     }
@@ -77,6 +89,10 @@ class LibroUseCaseTest {
 
     private Libro getLibro(){
         return Libro.builder().id(1).idEscritor("123").idCategoria(1).idEditorial(1).nombre("ABC").build();
+    }
+
+    private Caratula getCaratula(){
+        return Caratula.builder().caratula("ABC").build();
     }
 
 }
