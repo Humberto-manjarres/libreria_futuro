@@ -69,6 +69,15 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind' // Serialización y deserialización
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310' // Soporte para LocalDateTime
 
+	//Dependencia Spring AMQP
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+	//RabbitMQ
+	/*implementation 'org.reactivecommons.utils:object-mapper-api:0.1.0'
+	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'
+	implementation 'org.reactivecommons:async-commons-api:2.0.1'
+	implementation 'io.micrometer:micrometer-core:1.11.4'*/
+
 
 }
 

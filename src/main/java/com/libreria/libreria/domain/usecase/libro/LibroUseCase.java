@@ -8,6 +8,7 @@ import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.model.libro.Libro;
 import com.libreria.libreria.domain.model.libro.gateway.LibroConsumerGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
+import com.libreria.libreria.domain.model.libro.gateway.LibroQueueGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
 import com.libreria.libreria.domain.usecase.escritor.EscritorUseCase;
@@ -19,6 +20,7 @@ public class LibroUseCase {
 
     private final LibroGateway libroGateway;
     private final LibroConsumerGateway libroConsumerGateway;
+    private final LibroQueueGateway libroQueueGateway;
     private final EscritorUseCase escritorUseCase;
     private final CategoriaUseCase categoriaUseCase;
     private final EditorialUseCase editorialUseCase;
@@ -30,7 +32,11 @@ public class LibroUseCase {
                         categoriaUseCase.consultarCategoria(libro.getIdCategoria()),
                         editorialUseCase.consultarEditorial(libro.getIdEditorial())
                 )
-                .flatMap(tuple -> libroGateway.crearLibro(libro));
+                .flatMap(tuple -> libroGateway.crearLibro(libro))
+                .flatMap(libroCreado -> {
+                    return libroQueueGateway.libroCreado(libroCreado)
+                            .thenReturn(libroCreado); // Retornar el libro creado después de enviar a Rabbit
+                });
     }
 
     public Mono<JsonNode> consultarLibro(Integer id){

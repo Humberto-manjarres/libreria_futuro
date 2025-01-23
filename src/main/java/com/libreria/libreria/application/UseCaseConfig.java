@@ -5,6 +5,7 @@ import com.libreria.libreria.domain.model.editorial.gateway.EditorialGateway;
 import com.libreria.libreria.domain.model.escritor.gateway.EscritorGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroConsumerGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
+import com.libreria.libreria.domain.model.libro.gateway.LibroQueueGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
 import com.libreria.libreria.domain.usecase.escritor.EscritorUseCase;
@@ -31,8 +32,8 @@ public class UseCaseConfig {
     }
 
     @Bean
-    public LibroUseCase libroUseCase(LibroGateway libroGateway, LibroConsumerGateway libroConsumerGateway,EscritorUseCase escritorUseCase, CategoriaUseCase categoriaUseCase, EditorialUseCase editorialUseCase){
-        return new LibroUseCase(libroGateway,libroConsumerGateway,escritorUseCase,categoriaUseCase,editorialUseCase);
+    public LibroUseCase libroUseCase(LibroGateway libroGateway, LibroConsumerGateway libroConsumerGateway, LibroQueueGateway libroQueueGateway,EscritorUseCase escritorUseCase, CategoriaUseCase categoriaUseCase, EditorialUseCase editorialUseCase){
+        return new LibroUseCase(libroGateway,libroConsumerGateway,libroQueueGateway,escritorUseCase,categoriaUseCase,editorialUseCase);
     }
 
     /*@Bean
