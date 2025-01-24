@@ -8,6 +8,7 @@ import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.model.libro.Libro;
 import com.libreria.libreria.domain.model.libro.gateway.LibroConsumerGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
+import com.libreria.libreria.domain.model.libro.gateway.LibroQueueGateway;
 import com.libreria.libreria.domain.usecase.categoria.CategoriaUseCase;
 import com.libreria.libreria.domain.usecase.editorial.EditorialUseCase;
 import com.libreria.libreria.domain.usecase.escritor.EscritorUseCase;
@@ -27,6 +28,9 @@ class LibroUseCaseTest {
 
     @Mock
     private LibroGateway gateway;
+
+    @Mock
+    private LibroQueueGateway libroQueueGateway;
 
     @Mock
     private LibroConsumerGateway consumerGateway;
@@ -52,9 +56,12 @@ class LibroUseCaseTest {
         Mockito.when(categoriaUseCase.consultarCategoria(1)).thenReturn(Mono.just(getCategoria()));
         Mockito.when(editorialUseCase.consultarEditorial(1)).thenReturn(Mono.just(getEditorial()));
         Mockito.when(gateway.crearLibro(getLibro())).thenReturn(Mono.just(getLibro()));
+        Mockito.when(libroQueueGateway.libroCreado(getLibro())).thenReturn(Mono.empty());
         Mono<Libro> libro = libroUseCase.crearLibro(getLibro());
         StepVerifier.create(libro)
                 .expectNextMatches(libro1 -> libro1.getNombre().equals("ABC")).verifyComplete();
+
+        Mockito.verify(libroQueueGateway).libroCreado(getLibro());
     }
 
     @Test
