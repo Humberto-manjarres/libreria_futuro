@@ -1,23 +1,23 @@
-CREATE TABLE escritor (
+CREATE TABLE IF NOT EXISTS escritor (
     id SERIAL PRIMARY KEY,
     identificacion VARCHAR(255) NOT NULL UNIQUE,  -- Restricción UNIQUE
     nombre VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE categoria (
+CREATE TABLE IF NOT EXISTS categoria (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL
 );
 
 
-CREATE TABLE editorial (
+CREATE TABLE IF NOT EXISTS editorial (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT null,
     direccion VARCHAR(255) NOT null
 );
 
 
-CREATE TABLE libro (
+CREATE TABLE IF NOT EXISTS libro (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT null,
     numero_paginas VARCHAR(255) NOT null,

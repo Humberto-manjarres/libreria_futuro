@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    image: humbertoto22/libreria_futuro:latest
+    container_name: backend
+    ports:
+      - "8080:8080"  # Expone el puerto 8080 para acceder a la aplicación
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://postgres-db:5432/${POSTGRES_DATABASE}
+      SPRING_R2DBC_USERNAME: ${POSTGRES_USER}
+      SPRING_R2DBC_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: postgres:15  # Utiliza la imagen oficial de PostgreSQL, versión 15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DATABASE}         # Nombre de la base de datos
+      POSTGRES_USER: ${POSTGRES_USER}           # Usuario
+      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}   # Contraseña
+    ports:
+      - "5433:5432"  # Expone el puerto 5432 para conectar a PostgreSQL
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Es la ruta dentro del contenedor donde PostgreSQL guarda los datos.
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8081:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres-db
+
+volumes:
+  postgres-data: # Se utiliza para almacenar datos de la base de datos en el host, es decir, en el PC.
+    driver: local # almacena los datos en el host
+  pgadmin-data: # Agregar esta línea
+    driver: local
+
