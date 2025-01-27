@@ -10,9 +10,12 @@ spring:
     username: postgres
     password: Humberto22092
 
-# Se debe buscar la forma de que cuando el proyecto se levante cree las tablas de la BD automáticamente.
-# Ya sea mediante un archivo SQL o cualquier otro método.
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/libreria_db
 
+# debería la url estar de la siguiente manera ya que cuando se cree el contenedor apunte a la BD y no al mismo contenedor por el localhost
+# url: r2dbc:postgresql://postgres-db:5432/libreria_bd
 
 rabbitmq:
   port: 5672
@@ -21,3 +24,11 @@ rabbitmq:
   password: guest
   virtualHost: myVHost
   concurrentConsumers: 5
+
+aws:
+  s3:
+    bucket: nombre-del-bucket
+    region: us-east-1
+    access-key: TU_ACCESS_KEY
+    secret-key: TU_SECRET_KEY
+

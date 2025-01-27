@@ -1,4 +1,4 @@
-package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro;
+package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.postgresdb;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 

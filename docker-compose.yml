@@ -1,46 +1,47 @@
 version: '3.8'
 
 services:
+
+  db:
+    container_name: libreria
+    image: mongo:6.0
+    volumes:
+      - libreria-vol:/data/db
+    ports:
+      - 27017:27017  # no exponemos el puerto de nuestra bd, si los unicos que utilizaran nuestra bd son los contenedores que están en estre docker-compose
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: salvador
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    command: [ '--auth' ] # hace obligatorio utilizar contraseñas para ingresar al contendor.
+
+  mongo-express:
+    depends_on:
+      - db
+    image: mongo-express:1.0.0-alpha.4
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: salvador
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+      ME_CONFIG_MONGODB_SERVER: movies
+    ports:
+      - 8081:8081
+    restart: always
+
   backend:
     image: humbertoto22/libreria_futuro:latest
     container_name: backend
     ports:
       - "8080:8080"  # Expone el puerto 8080 para acceder a la aplicación
     environment:
-      SPRING_R2DBC_URL: r2dbc:postgresql://postgres-db:5432/${POSTGRES_DATABASE}
-      SPRING_R2DBC_USERNAME: ${POSTGRES_USER}
-      SPRING_R2DBC_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      MONGODB: salvador:123456@libreria:27017
+      DB_NAME_MONGO: libreria_db
     depends_on:
-      - postgres-db
-
-  postgres-db:
-    image: postgres:15  # Utiliza la imagen oficial de PostgreSQL, versión 15
-    container_name: postgres-db
-    environment:
-      POSTGRES_DB: ${POSTGRES_DATABASE}         # Nombre de la base de datos
-      POSTGRES_USER: ${POSTGRES_USER}           # Usuario
-      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}   # Contraseña
-    ports:
-      - "5433:5432"  # Expone el puerto 5432 para conectar a PostgreSQL
-    volumes:
-      - postgres-data:/var/lib/postgresql/data  # Es la ruta dentro del contenedor donde PostgreSQL guarda los datos.
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin123
-    ports:
-      - "8081:80"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - postgres-db
+      - db
+      - mongo-express
+    restart: always
 
 volumes:
-  postgres-data: # Se utiliza para almacenar datos de la base de datos en el host, es decir, en el PC.
-    driver: local # almacena los datos en el host
-  pgadmin-data: # Agregar esta línea
-    driver: local
+  libreria-vol:
+    external: false
+
 

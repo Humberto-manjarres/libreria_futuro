@@ -54,7 +54,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	//mongo db NOSql
-	//implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 
 	// postgres reactivo & r2dbc
 	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
@@ -77,6 +77,10 @@ dependencies {
 	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'
 	implementation 'org.reactivecommons:async-commons-api:2.0.1'
 	implementation 'io.micrometer:micrometer-core:1.11.4'*/
+
+	//AWS S3
+	implementation 'software.amazon.awssdk:s3:2.20.17'
+
 
 
 }

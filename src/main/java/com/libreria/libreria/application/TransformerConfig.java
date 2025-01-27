@@ -3,7 +3,8 @@ package com.libreria.libreria.application;
 import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.categoria.trasnformer.CategoriaR2dbcTransformer;
 import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.editorial.transformer.EditorialR2dbcTransformer;
 import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.escritor.transformer.EscritorR2dbcTransformer;
-import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.transformer.LibroR2dbcTransformer;
+import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.mongodb.transformer.DetalleLibroTransformer;
+import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.postgresdb.transformer.LibroR2dbcTransformer;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.categoria.transformers.CategoriaTransformer;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.editorial.transformers.EditorialTransformer;
 import com.libreria.libreria.infraestructure.entry_points.reactive_web.escritor.transformers.EscritorTransformer;
@@ -61,5 +62,11 @@ public class TransformerConfig {
     public LibroR2dbcTransformer libroR2dbcTransformer() {
         return Mappers.getMapper(
                 LibroR2dbcTransformer.class);
+    }
+
+    @Bean
+    public DetalleLibroTransformer detalleLibroTransformer() {
+        return Mappers.getMapper(
+                DetalleLibroTransformer.class);
     }
 }
