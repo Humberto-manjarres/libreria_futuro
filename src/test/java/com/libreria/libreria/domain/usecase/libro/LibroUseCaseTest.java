@@ -6,6 +6,7 @@ import com.libreria.libreria.domain.model.editorial.Editorial;
 import com.libreria.libreria.domain.model.escritor.Escritor;
 import com.libreria.libreria.domain.model.libro.Caratula;
 import com.libreria.libreria.domain.model.libro.Libro;
+import com.libreria.libreria.domain.model.libro.gateway.DetalleLibroGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroConsumerGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
 import com.libreria.libreria.domain.model.libro.gateway.LibroQueueGateway;
@@ -31,6 +32,9 @@ class LibroUseCaseTest {
 
     @Mock
     private LibroQueueGateway libroQueueGateway;
+
+    @Mock
+    private DetalleLibroGateway detalleLibroGateway;
 
     @Mock
     private LibroConsumerGateway consumerGateway;

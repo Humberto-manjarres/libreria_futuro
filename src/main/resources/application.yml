@@ -12,10 +12,9 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/libreria_db
-
-# debería la url estar de la siguiente manera ya que cuando se cree el contenedor apunte a la BD y no al mismo contenedor por el localhost
-# url: r2dbc:postgresql://postgres-db:5432/libreria_bd
+      uri: mongodb://${MONGODB}
+      database: libreria_db
+      #uri: mongodb://localhost:27017/libreria_db
 
 rabbitmq:
   port: 5672
