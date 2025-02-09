@@ -1,8 +1,8 @@
-package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.postgresdb;
+package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro_postgres;
 
 import com.libreria.libreria.domain.model.libro.Libro;
 import com.libreria.libreria.domain.model.libro.gateway.LibroGateway;
-import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.postgresdb.transformer.LibroR2dbcTransformer;
+import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro_postgres.transformer.LibroR2dbcTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

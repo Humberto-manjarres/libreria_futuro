@@ -1,0 +1,50 @@
+# DEPLOYMENT archivo que contiene la configuración del POT de MongoDB el cual vamos a desplegar.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment # tipo de archivo para poderlo identificar.
+  labels:
+    app: mongo
+spec: # especificación
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec: # sección de contenedores que vayamos a montar.
+      containers:
+      - name: mongo
+        image: mongo:6.0
+        ports:
+        - containerPort: 27017
+        #command: ["mongod", "--auth=false"] # Deshabilita autenticación eliminando la necesidad de credenciales
+        #env:
+        #- name: MONGO_INITDB_ROOT_USERNAME
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: mongo-secrets
+        #      key: DB_USER
+        #- name: MONGO_INITDB_ROOT_PASSWORD
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: mongo-secrets
+        #      key: DB_PASSWORD
+
+---
+# SEVICE archivo con el cual conectamos nuestra Imagen mongoBD con otra imagen dentro del clúster.
+apiVersion: v1
+kind: Service # tipo de archivo.
+metadata:
+  name: mongo-service
+spec: # especificación
+  type: NodePort
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017 # puede ser cualquier puerto. Es el puerto mediante todos afuera del pods pero dentro del clúster, puedan acceder a nuestra BD. 
+      targetPort: 27017 # este puerto es el que se conectará con el puerto de nuestra imagen.
+      nodePort: 30017 # Puerto de acceso externo

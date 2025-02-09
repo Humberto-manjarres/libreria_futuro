@@ -1,0 +1,53 @@
+# DEPLOYMENT archivo que contiene la configuración del POT de mongo-express el cual vamos a desplegar.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express-deployment # tipo de archivo para poderlo identificar.
+  labels:
+    app: mongo-express
+spec: # especificación
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec: # sección de contenedores que vayamos a montar.
+      containers:
+      - name: mongo-express
+        image: mongo-express:1.0.0-alpha.4
+        ports:
+        - containerPort: 8081
+        env:
+        - name: ME_CONFIG_MONGODB_SERVER
+          value: mongo-service
+        - name: ME_CONFIG_MONGODB_PORT
+          value: "27017"
+        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-express-secrets
+              key: DB_USER
+        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-express-secrets
+              key: DB_PASSWORD     
+
+---
+# SEVICE archivo con el cual conectamos nuestra Imagen mongo-express con otra imagen dentro del clúster.
+apiVersion: v1
+kind: Service # tipo de archivo.
+metadata:
+  name: mongo-express-service
+spec: # especificación
+  type: NodePort # permite hacer la parte del ingress, es decir, acceso externo al clúster.
+  selector:
+    app: mongo-express
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+      nodePort: 30200 # debe estar en el rango 30000 - 32767, este es el puerto el cual será accesible desde afuera.

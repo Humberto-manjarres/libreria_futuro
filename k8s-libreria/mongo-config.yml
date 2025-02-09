@@ -1,0 +1,9 @@
+# CONFIGMAP archivo para hacer referencia a las variables de entorno que utilizará MongoDB.
+apiVersion: v1
+kind: ConfigMap # tipo de archivo.
+metadata:
+  name: mongo-config # nombre de nuestro configmap.
+data:
+  DB_NAME: libreria_bd # nombre de la BD.
+  DB_HOST: mongo-service # nombre del SERVICE.
+  DB_PORT: "27017" # puerto por defecto de la BD.

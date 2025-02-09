@@ -1,4 +1,4 @@
-package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.mongodb;
+package com.libreria.libreria.infraestructure.driven_adapters.reactive_repository.libro_mongo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 

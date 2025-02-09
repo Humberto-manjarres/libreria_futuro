@@ -1,0 +1,72 @@
+# DEPLOYMENT archivo que contiene la configuración del POT de MongoDB el cual vamos a desplegar.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment # tipo de archivo para poderlo identificar.
+  labels:
+    app: backend
+spec: # especificación
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec: # sección de contenedores que vayamos a montar.
+      containers:
+      - name: backend
+        image: humbertoto22/libreria_futuro:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: APP_PROFILE
+            value: kubernetes
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: backend-secrets
+                key: MONGO_URI
+#-        - name: DB_USER
+#-          valueFrom:
+#-            secretKeyRef:
+#-              name: mongo-secrets
+#-              key: DB_USER
+#-        - name: DB_PASSWORD
+#-          valueFrom:
+#-            secretKeyRef:
+#-              name: mongo-secrets
+#-              key: DB_PASSWORD
+#-        - name: MONGO_HOST
+#-          valueFrom:
+#-            configMapKeyRef:
+#-              name: mongo-config
+#-              key: DB_HOST
+#-        - name: MONGO_PORT
+#-          valueFrom:
+#-            configMapKeyRef:
+#-              name: mongo-config
+#-              key: DB_PORT
+#-        - name: DB_NAME
+#-          valueFrom:
+#-            configMapKeyRef:
+#-              name: mongo-config
+#-              key: DB_NAME
+#-        
+
+---
+# SEVICE archivo con el cual conectamos nuestra Imagen mongoBD con otra imagen dentro del clúster.
+apiVersion: v1
+kind: Service # tipo de archivo.
+metadata:
+  name: backend-service
+spec: # especificación
+  type: NodePort # permite hacer la parte del ingress, es decir, acceso de un externo al clúster.
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080 # este puerto es el que se conectará con el puerto de nuestra imagen.
+      nodePort: 30300 # debe estar en el rango 30000 - 32767, este es el puerto el cual será accesible desde afuera.

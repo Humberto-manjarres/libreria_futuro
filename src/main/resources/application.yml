@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: "libreria"
+
+  profiles:
+    active: ${APP_PROFILE:local} # Perfil por defecto: local
+
   devtools:
     add-properties: false
   r2dbc:
@@ -31,3 +35,19 @@ aws:
     access-key: TU_ACCESS_KEY
     secret-key: TU_SECRET_KEY
 
+logging:
+  level:
+    root: DEBUG
+
+---
+spring:
+  config.activate.on-profile: kubernetes
+
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_URI}
+      database: libreria_db
+      #uri: mongodb://${DB_USER}:${DB_PASSWORD}@${MONGO_HOST:mongo-service}:${MONGO_PORT:27017}/${DB_NAME:libreria_db}?authMechanism=SCRAM-SHA-256
+
+#rabbitmq:
+#  host: rabbitmq-service

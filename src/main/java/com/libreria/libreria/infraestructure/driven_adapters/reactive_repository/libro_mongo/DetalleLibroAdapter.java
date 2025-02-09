@@ -1,9 +1,9 @@
-package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.mongodb;
+package com.libreria.libreria.infraestructure.driven_adapters.reactive_repository.libro_mongo;
 
 
 import com.libreria.libreria.domain.model.libro.DetalleLibro;
 import com.libreria.libreria.domain.model.libro.gateway.DetalleLibroGateway;
-import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.mongodb.transformer.DetalleLibroTransformer;
+import com.libreria.libreria.infraestructure.driven_adapters.reactive_repository.libro_mongo.transformer.DetalleLibroTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

@@ -1,4 +1,4 @@
-package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.postgresdb;
+package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro_postgres;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

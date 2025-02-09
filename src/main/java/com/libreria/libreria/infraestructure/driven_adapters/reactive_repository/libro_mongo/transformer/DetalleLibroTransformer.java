@@ -1,7 +1,7 @@
-package com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.mongodb.transformer;
+package com.libreria.libreria.infraestructure.driven_adapters.reactive_repository.libro_mongo.transformer;
 
 import com.libreria.libreria.domain.model.libro.DetalleLibro;
-import com.libreria.libreria.infraestructure.driven_adapters.r2dbc_repository.libro.mongodb.DetalleLibroEntity;
+import com.libreria.libreria.infraestructure.driven_adapters.reactive_repository.libro_mongo.DetalleLibroEntity;
 import org.mapstruct.Mapper;
 
 @Mapper
