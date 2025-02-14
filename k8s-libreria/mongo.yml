@@ -40,11 +40,11 @@ kind: Service # tipo de archivo.
 metadata:
   name: mongo-service
 spec: # especificación
-  type: NodePort
+  #type: NodePort
   selector:
     app: mongo
   ports:
     - protocol: TCP
       port: 27017 # puede ser cualquier puerto. Es el puerto mediante todos afuera del pods pero dentro del clúster, puedan acceder a nuestra BD. 
       targetPort: 27017 # este puerto es el que se conectará con el puerto de nuestra imagen.
-      nodePort: 30017 # Puerto de acceso externo
+      #nodePort: 30017 # Puerto de acceso externo
