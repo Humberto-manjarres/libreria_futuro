@@ -1,4 +1,4 @@
-# DEPLOYMENT archivo que contiene la configuración del POT de MongoDB el cual vamos a desplegar.
+# DEPLOYMENT archivo que contiene la configuración del POT del Backend el cual vamos a desplegar.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
