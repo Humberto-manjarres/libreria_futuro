@@ -1,4 +1,4 @@
-# DEPLOYMENT archivo que contiene la configuración del POT del Backend el cual vamos a desplegar.
+# DEPLOYMENT archivo que contiene la configuración del POT de MongoDB el cual vamos a desplegar.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -55,18 +55,35 @@ spec: # especificación
 #-              key: DB_NAME
 #-        
 
+
+# SIN ISTIO - esta forma es para cuando una petición le pega directamente al backend
+#---
+## SEVICE archivo con el cual conectamos nuestra Imagen backend con otra imagen dentro del clúster.
+#apiVersion: v1
+#kind: Service # tipo de archivo.
+#metadata:
+#  name: backend-service
+#spec: # especificación
+#  type: NodePort # permite hacer la parte del ingress, es decir, acceso de un externo al clúster.
+#  selector:
+#    app: backend
+#  ports:
+#    - protocol: TCP
+#      port: 8080
+#      targetPort: 8080 # este puerto es el que se conectará con el puerto de nuestra imagen.
+#      nodePort: 30300 # debe estar en el rango 30000 - 32767, este es el puerto el cual será accesible desde afuera.
+
+
+# CON ISTIO - esta forma es para cuando una petición le pega directamente al gateway de istio y no al backend
 ---
-# SEVICE archivo con el cual conectamos nuestra Imagen mongoBD con otra imagen dentro del clúster.
 apiVersion: v1
-kind: Service # tipo de archivo.
+kind: Service
 metadata:
   name: backend-service
-spec: # especificación
-  type: NodePort # permite hacer la parte del ingress, es decir, acceso de un externo al clúster.
+spec:
   selector:
     app: backend
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080 # este puerto es el que se conectará con el puerto de nuestra imagen.
-      nodePort: 30300 # debe estar en el rango 30000 - 32767, este es el puerto el cual será accesible desde afuera.
+      port: 80
+      targetPort: 8080

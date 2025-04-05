@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: backend-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "backend.miempresa.com"
+
+# en el header de la petición de postman debe ir Host:backend.miempresa.com
+# con este host backend.miempresa.com sabremos a que virtual service enrutar.
